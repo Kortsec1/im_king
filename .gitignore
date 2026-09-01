@@ -1,0 +1,27 @@
+# Public repository allowlist. Raw photos, biometric embeddings, local
+# environments, and iCloud placeholders intentionally remain local.
+*
+!.gitignore
+!README.md
+
+!backend/
+backend/*
+!backend/app_v2.py
+!backend/requirements.txt
+!backend/scripts/
+backend/scripts/*
+!backend/scripts/prepare_gallery_v2.py
+!backend/data/
+backend/data/*
+!backend/data/gallery_v2/
+backend/data/gallery_v2/*
+!backend/data/gallery_v2/index.json
+
+!frontend/
+frontend/*
+!frontend/dist/
+!frontend/dist/**
+
+!scripts/
+scripts/*
+!scripts/dev_gateway.py
