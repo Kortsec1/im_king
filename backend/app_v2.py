@@ -81,9 +81,17 @@ class Engine:
         matches = []
         for person_index, score in grouped[:3]:
             p = self.people[person_index]
+            result_image = p.get("preview_url", p.get("source_url", p["image_url"]))
+            if "/thumb/" in result_image and "?" in result_image:
+                clean = result_image.split("?", 1)[0]
+                filename = clean.rsplit("/", 1)[-1]
+                result_image = clean + f"/640px-{filename}"
+            if "commons.wikimedia.org/wiki/Special:FilePath/" in result_image:
+                result_image = result_image.replace("http://", "https://").replace("/Special:FilePath/", "/Special:Redirect/file/")
+                result_image += ("&" if "?" in result_image else "?") + "width=640"
             relative = .52 + .46 / (1. + np.exp(-(score - median) / (spread * 1.25)))
             matches.append({
-                "id": p["id"], "name": p["name"], "image_url": p.get("source_url", p["image_url"]),
+                "id": p["id"], "name": p["name"], "image_url": result_image,
                 "similarity": min(.99, float(relative)), "raw_similarity": max(-1., min(1., score)),
                 "score_type": "gallery_relative_cosine",
             })

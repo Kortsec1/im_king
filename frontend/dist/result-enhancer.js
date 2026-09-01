@@ -9,8 +9,9 @@
     if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
     return response;
   };
-  let galleryCount = 128;
-  originalFetch("/api/v1/health").then(r => r.json()).then(data => { galleryCount = data.people || galleryCount; }).catch(() => {});
+  let galleryCount = 180;
+  const updateGalleryCount = () => document.querySelectorAll("[data-gallery-count]").forEach(el => { el.textContent = galleryCount.toLocaleString("ko-KR"); });
+  originalFetch("/api/v1/health").then(r => r.json()).then(data => { galleryCount = data.people || galleryCount; updateGalleryCount(); }).catch(() => {});
   const bonusPrefixes = ["동물상 ·", "진격의 거인 ·", "귀멸의 칼날 ·", "원피스 ·"];
 
   function card(label, image, name, score, winner = false) {
@@ -18,11 +19,15 @@
     figure.className = `compare-card${winner ? " winner" : ""}`;
     const badge = winner ? '<span class="winner-badge">가장 닮은 사람</span>' : "";
     figure.innerHTML = `${badge}<figcaption>${label}</figcaption><img alt="${name}" /><strong>${name}</strong>${score ? `<span>${score}</span>` : ""}`;
-    figure.querySelector("img").src = image;
+    const img = figure.querySelector("img");
+    img.loading = winner ? "eager" : "lazy";
+    img.decoding = "async";
+    img.src = image;
     return figure;
   }
 
   function enhance() {
+    enhanceHome();
     enhanceLoading();
     const results = document.querySelector(".results");
     if (!results || results.dataset.comparisonEnhanced) return;
@@ -60,10 +65,21 @@
       const name = bonus.querySelector("strong")?.textContent || "오늘의 닮은꼴";
       const score = bonus.querySelector(".similarity")?.textContent || "";
       showcase.innerHTML = `<div><small>또 다른 닮은꼴</small><h2>${name}</h2><p>재미로 확인하는 동물상·캐릭터상 결과예요.</p><strong>${score}</strong></div><img alt="${name}" />`;
+      showcase.querySelector("img").loading = "lazy";
+      showcase.querySelector("img").decoding = "async";
       showcase.querySelector("img").src = image.src;
       list.after(showcase);
       bonus.remove();
     }
+  }
+
+  function enhanceHome() {
+    const intro = document.querySelector(".intro");
+    if (!intro || intro.querySelector(".gallery-count-badge")) return;
+    const badge = document.createElement("div");
+    badge.className = "gallery-count-badge";
+    badge.innerHTML = `<i class="gallery-pulse"></i><span>현재 <strong data-gallery-count>${galleryCount.toLocaleString("ko-KR")}</strong>명의 얼굴 데이터와 비교</span>`;
+    intro.append(badge);
   }
 
   function enhanceLoading() {
@@ -74,7 +90,7 @@
       ["얼굴 위치를 찾는 중", "사진 속에서 가장 큰 얼굴을 검출하고 있어요"],
       ["얼굴을 정렬하는 중", "눈·코·입의 기준점을 맞추고 있어요"],
       ["얼굴 특징을 만드는 중", "512차원 Face Embedding을 생성하고 있어요"],
-      ["128명의 얼굴과 비교 중", "Cosine Similarity를 한 번에 계산하고 있어요"],
+      [`${galleryCount.toLocaleString("ko-KR")}명의 얼굴과 비교 중`, "Cosine Similarity를 한 번에 계산하고 있어요"],
       ["가장 닮은 TOP 3 선정 중", "유사도가 높은 순서로 결과를 정리하고 있어요"],
     ];
     loading.innerHTML = `<div class="analysis-visual">

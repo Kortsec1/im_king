@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from pathlib import Path
 from urllib.parse import quote, unquote, urlencode
@@ -14,7 +15,7 @@ from insightface.app import FaceAnalysis
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "gallery_v2"
 PUBLIC = ROOT / "data" / "public" / "people"
-TARGET = 180
+TARGET = 300
 USER_AGENT = "PcuFestivalLookalike/0.2 (educational event)"
 
 OCCUPATIONS = {
@@ -25,8 +26,15 @@ OCCUPATIONS = {
 
 def request_json(url: str, timeout: int = 30):
     req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
-    with urlopen(req, timeout=timeout) as response:
-        return json.load(response)
+    for attempt in range(6):
+        try:
+            with urlopen(req, timeout=timeout) as response:
+                return json.load(response)
+        except Exception as exc:
+            if "429" not in str(exc) or attempt == 5:
+                raise
+            time.sleep(3 * (attempt + 1))
+    raise RuntimeError("API request failed")
 
 def query_candidates() -> list[dict]:
     values = " ".join(f"wd:{qid}" for qid in OCCUPATIONS)
@@ -73,13 +81,22 @@ def query_category_candidates() -> list[dict]:
         ("South Korean sportspeople", "운동선수"),
         ("South Korean comedians", "코미디언"),
         ("South Korean models", "모델"),
+        ("South Korean politicians", "정치인"),
+        ("Members of the National Assembly (South Korea)", "국회의원"),
+        ("South Korean journalists", "언론인"),
+        ("South Korean academics", "학계"),
+        ("South Korean businesspeople", "기업인"),
+        ("South Korean television presenters", "방송인"),
+        ("South Korean association football players", "축구선수"),
+        ("South Korean baseball players", "야구선수"),
+        ("South Korean Olympic competitors", "올림픽 선수"),
     ]
     buckets: list[list[dict]] = []
     for category, occupation in categories:
         params = {
             "action": "query", "generator": "categorymembers", "gcmtitle": f"Category:{category}",
             "gcmtype": "page", "gcmlimit": "500", "prop": "pageprops|pageimages",
-            "ppprop": "wikibase_item", "piprop": "thumbnail|original", "pithumbsize": "500", "format": "json",
+            "ppprop": "wikibase_item", "piprop": "thumbnail|original", "pithumbsize": "640", "format": "json",
         }
         url = "https://en.wikipedia.org/w/api.php?" + urlencode(params)
         pages = request_json(url, 40).get("query", {}).get("pages", {}).values()
@@ -93,7 +110,7 @@ def query_category_candidates() -> list[dict]:
                 "gender": "", "birth": "", "occupations": [occupation],
             })
         buckets.append(bucket)
-        time.sleep(.35)
+        time.sleep(1.0)
     ordered = []
     while any(buckets):
         for bucket in buckets:
@@ -115,6 +132,22 @@ def download(url: str) -> bytes:
 def normalized(vector: np.ndarray) -> np.ndarray:
     return (vector / max(float(np.linalg.norm(vector)), 1e-12)).astype(np.float32)
 
+def preview_url(url: str, width: int = 640) -> str:
+    """Use Wikimedia's resized CDN asset instead of downloading multi-megabyte originals."""
+    if "/thumb/" in url:
+        clean = url.split("?", 1)[0]
+        if re.search(r"/\d+px-[^/]+$", clean):
+            return re.sub(r"/\d+px-([^/]+)$", rf"/{width}px-\1", clean)
+        filename = clean.rsplit("/", 1)[-1]
+        return clean + f"/{width}px-{filename}"
+    if "commons.wikimedia.org/wiki/Special:FilePath/" in url:
+        target = url.replace("http://", "https://").replace("/Special:FilePath/", "/Special:Redirect/file/")
+        return target + (("&" if "?" in target else "?") + f"width={width}")
+    if "/commons/" not in url:
+        return url
+    filename = url.split("?", 1)[0].rsplit("/", 1)[-1]
+    return url.replace("/commons/", "/commons/thumb/", 1) + f"/{width}px-{filename}"
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True); PUBLIC.mkdir(parents=True, exist_ok=True)
     analyzer = FaceAnalysis(name="buffalo_l", allowed_modules=["detection", "recognition"], providers=["CPUExecutionProvider"])
@@ -127,6 +160,8 @@ def main() -> None:
     else:
         embeddings = []; samples = []; people = []
     existing_ids = {person["id"] for person in people}
+    for person in people:
+        person["preview_url"] = preview_url(person.get("source_url", person["image_url"]))
     for candidate in query_category_candidates():
         if len(people) >= TARGET: break
         if candidate["id"] in existing_ids: continue
@@ -145,6 +180,7 @@ def main() -> None:
             people.append({
                 "id": candidate["id"], "name": candidate["name"],
                 "image_url": f"/people/{filename}", "source_url": candidate["image"],
+                "preview_url": preview_url(candidate["image"]),
                 "gender": candidate["gender"], "birth": candidate["birth"],
                 "occupations": candidate["occupations"], "sample_count": len(refs),
             })
@@ -156,7 +192,7 @@ def main() -> None:
             print(f"[{len(people):03}/{TARGET}] {candidate['name']} ({len(refs)} samples)", flush=True)
         except Exception as exc:
             print(f"skip {candidate['name']}: {exc}", flush=True)
-        time.sleep(0.04)
+        time.sleep(1.5)
     np.save(OUT / "embeddings.npy", np.stack(embeddings))
     (OUT / "index.json").write_text(json.dumps({"people": people, "samples": samples}, ensure_ascii=False, indent=2))
     print(f"gallery ready: {len(people)} people / {len(embeddings)} embeddings", flush=True)
