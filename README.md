@@ -104,13 +104,15 @@ cd backend
 
 `backend/app_v2.py`에는 다음 기능이 포함되어 있습니다.
 
-- Wikimedia 기반 180명 얼굴 갤러리
+- Wikimedia 기반 현재 193명 얼굴 갤러리(생성 목표 300명)
 - 원본 cosine 순위와 갤러리 분포 기반 상대 유사도 표시
 - 동물상 및 애니메이션 캐릭터상
 - 사용자 사진과 1위 결과의 대형 비교 화면
 - 얼굴 검출·정렬·512D embedding·cosine 검색 단계 애니메이션
 
 얼굴 embedding과 원본 사진은 공개 Git 저장소에 포함하지 않습니다. 먼저 로컬에서 갤러리를 생성합니다.
+`backend/data/gallery_v2/index.json`은 인물 메타데이터만 포함하며, 새 환경에서
+`embeddings.npy`와 기준 사진을 아래 생성기로 준비해야 합니다.
 
 ```bash
 cd backend
