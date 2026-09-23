@@ -27,6 +27,26 @@ class Gateway(SimpleHTTPRequestHandler):
         conn.close()
 
     def do_GET(self):
+        route = self.path.split("?", 1)[0]
+        if route == "/gallery":
+            self.path = "/gallery.html"
+        elif route == "/detail":
+            self.path = "/detail.html"
+        elif route == "/admin":
+            self.path = "/admin.html"
+        elif route == "/logs":
+            self.path = "/logs.html"
+        elif route == "/exhibit":
+            self.path = "/exhibit.html"
+        elif route in {"/community", "/feed"}:
+            self.path = "/feed.html"
+        elif route == "/share":
+            self.path = "/share.html"
+        elif route == "/account":
+            self.path = "/account.html"
+        local_path = DIST / self.path.lstrip("/").split("?", 1)[0]
+        if local_path.is_file():
+            return super().do_GET()
         if self.path.startswith(("/people/wikidata-", "/animal-image/")):
             qid = (self.path.rsplit("wikidata-", 1)[1] if "wikidata-" in self.path else self.path.rsplit("/", 1)[1]).split(".", 1)[0]
             request = Request(
@@ -75,4 +95,4 @@ class Gateway(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     print("Festival gateway: http://127.0.0.1:8080", flush=True)
-    ThreadingHTTPServer(("127.0.0.1", 8080), Gateway).serve_forever()
+    ThreadingHTTPServer(("0.0.0.0", 8080), Gateway).serve_forever()
