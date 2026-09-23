@@ -2,13 +2,86 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
-    {"source": "/dataset-genders.json", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate"}]},
-    {"source": "/dataset-v2.json", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"}]},
-    {"source": "/assets/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
-    {"source": "/people/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
-    {"source": "/nonhuman/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
-    {"source": "/(.*).css", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate, s-maxage=0"}]},
-    {"source": "/(.*).js", "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate, s-maxage=0"}]}
+    {
+      "source": "/dataset-genders.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/dataset-v2.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/people/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/nonhuman/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate, s-maxage=0"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate, s-maxage=0"
+        }
+      ]
+    }
   ],
-  "rewrites": [{"source": "/gallery", "destination": "/gallery.html"}, {"source": "/detail", "destination": "/detail.html"}, {"source": "/admin", "destination": "/admin.html"}, {"source": "/feed", "destination": "/feed.html"}, {"source": "/share", "destination": "/share.html"}, {"source": "/account", "destination": "/account.html"}, {"source": "/community", "destination": "/feed.html"}]
+  "rewrites": [
+    {
+      "source": "/gallery",
+      "destination": "/gallery.html"
+    },
+    {
+      "source": "/detail",
+      "destination": "/detail.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/account",
+      "destination": "/account.html"
+    }
+  ]
 }
