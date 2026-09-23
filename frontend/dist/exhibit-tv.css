@@ -24,3 +24,23 @@
 #exhibition:fullscreen #exhibitStatus{flex:none;margin:10px 0 0;font-size:12px;min-height:18px}
 @media(max-height:600px){#exhibition:fullscreen .exhibit-description,#exhibition:fullscreen .exhibit-process,#exhibition:fullscreen .exhibit-measure-note{display:none}#exhibition:fullscreen .exhibit-heading p{display:none}#exhibition:fullscreen .exhibit-info h2{font-size:28px}#exhibition:fullscreen .exhibit-controls button{padding:8px 12px;min-height:44px}}
 @media(max-width:600px) and (orientation:portrait){#exhibition:fullscreen #exhibitSlide{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:8px}#exhibition:fullscreen .exhibit-info dl,#exhibition:fullscreen .exhibit-description,#exhibition:fullscreen .exhibit-process,#exhibition:fullscreen .exhibit-measure-note{display:none}#exhibition:fullscreen .exhibit-info h2{font-size:26px}#exhibition:fullscreen .exhibit-stats{margin:4px 0}#exhibition:fullscreen .exhibit-controls{gap:8px;justify-content:center}#exhibition:fullscreen .exhibit-controls button{min-height:44px;padding:8px 10px}#exhibition:fullscreen .exhibit-heading p{display:none}}
+
+/* Fullscreen composition: centered exhibition canvas with balanced visual weight. */
+.exhibit-page #exhibition:fullscreen{padding:clamp(22px,3vh,38px) clamp(34px,5vw,84px);background:#fff}
+#exhibition:fullscreen .exhibit-heading{width:min(100%,1440px);margin:0 auto clamp(14px,2vh,24px)}
+#exhibition:fullscreen #exhibitSlide{width:min(100%,1440px);margin:0 auto;grid-template-columns:minmax(380px,.92fr) minmax(420px,1.08fr);gap:clamp(48px,7vw,112px);align-items:center;justify-content:center}
+#exhibition:fullscreen .exhibit-photo-area{width:min(100%,560px);height:min(68vh,760px);justify-self:end;border-radius:18px;background:#f7f8f9;box-shadow:0 18px 55px rgba(25,27,33,.08)}
+#exhibition:fullscreen .exhibit-info{width:min(100%,600px);justify-self:start;padding-right:clamp(0px,3vw,44px)}
+#exhibition:fullscreen .exhibit-info h2{font-size:clamp(38px,4vw,62px);line-height:1.08;margin-bottom:10px}
+#exhibition:fullscreen .exhibit-group{font-size:15px;margin-bottom:18px}
+#exhibition:fullscreen .exhibit-description{font-size:16px;line-height:1.65;max-height:none;margin:0 0 18px}
+#exhibition:fullscreen .exhibit-stats{margin:18px 0;gap:10px}
+#exhibition:fullscreen .exhibit-stats>div{padding:12px 14px}
+#exhibition:fullscreen .exhibit-stats strong{font-size:28px}
+#exhibition:fullscreen .exhibit-info dl{margin:12px 0;gap:0 24px}
+#exhibition:fullscreen .exhibit-info dl div{padding:10px 0;font-size:14px}
+#exhibition:fullscreen .exhibit-process{margin-top:14px;padding:12px 15px}
+#exhibition:fullscreen .exhibit-controls{width:min(100%,1440px);margin:clamp(16px,2vh,26px) auto 0;justify-content:center}
+#exhibition:fullscreen #exhibitStatus{width:min(100%,1440px);margin:9px auto 0}
+@media(min-width:1500px) and (min-height:850px){#exhibition:fullscreen #exhibitSlide{grid-template-columns:minmax(440px,600px) minmax(480px,620px)}#exhibition:fullscreen .exhibit-photo-area{width:560px;height:min(70vh,780px)}}
+@media(max-width:1050px) and (orientation:landscape){#exhibition:fullscreen #exhibitSlide{grid-template-columns:minmax(300px,.9fr) minmax(340px,1.1fr);gap:34px}#exhibition:fullscreen .exhibit-photo-area{width:100%;height:min(62vh,620px)}#exhibition:fullscreen .exhibit-info{padding-right:0}#exhibition:fullscreen .exhibit-info h2{font-size:34px}}
