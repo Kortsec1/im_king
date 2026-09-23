@@ -1,0 +1,35 @@
+.user-face-analysis{border:1px solid #e4e6ea;border-radius:20px;padding:24px;background:#fafbfc;color:#20242b}
+.user-face-analysis header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.user-face-analysis small{font-size:12px;color:#67717e}.user-face-analysis h2{font-size:21px;letter-spacing:-.04em;margin:6px 0 0}
+.face-points-toggle{min-height:44px;flex-shrink:0;border:1px solid #cdd5dc;border-radius:100px;padding:10px 15px;background:white;color:#46515d;font-weight:700;cursor:pointer}
+.face-points-toggle[aria-pressed=true]{background:#e5f5f2;color:#186859;border-color:#b5dfd5}
+.user-face-photo{position:relative;width:min(100%,460px);margin:0 auto;overflow:hidden;border-radius:12px;line-height:0}
+.user-face-photo img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;transform:none!important}
+.user-face-photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;fill:#edfffb;stroke:#247e70;stroke-width:.65;overflow:hidden}
+.user-face-analysis>p{font-size:12px;line-height:1.75;color:#697380;margin:16px 0 0}
+.dataset-mode-links button[aria-pressed=true]{background:#20242b!important;color:white!important;border-color:#20242b!important}
+.share-actions .button{box-shadow:none;border-radius:12px;min-height:52px}.share-actions{gap:10px}
+.result-poster{background:#f4f6f7!important;color:#20242b!important;border:1px solid #e1e5e9!important;box-shadow:none!important}
+.result-poster:after{display:none!important}.poster-tag,.poster-score small,.poster-score p{color:#68737e!important}.poster-score strong{color:#20242b!important}.poster-photos>span{color:#9aa4ad!important}.poster-photos figcaption{color:#20242b!important}.poster-photos figure{background:white!important;border-radius:12px;overflow:hidden}
+.poster-tag,.poster-photos figcaption{background:rgba(255,255,255,.94)!important}.poster-photos figure:last-child{transform:none!important;filter:none!important}.share-actions .primary{background:#20242b!important;color:#fff!important}
+@media(max-width:760px){
+ .intro{width:100%!important}.intro:before{display:none!important}.app-global-header~.auth-widget{display:none!important}body:has(.app-global-header)>.auth-widget{display:none!important}
+ .app-global-header{position:relative!important}.app-shell{padding-top:26px!important;padding-bottom:36px!important}
+ .start-layout{padding-top:0!important;gap:24px!important}.intro{text-align:left!important}
+ .intro h1{font-size:36px!important;line-height:1.16!important;letter-spacing:-.055em!important;max-width:340px}
+ .intro>p:not(.privacy){font-size:14px!important;margin:12px 0 0!important}
+ .intro .privacy{position:static!important;transform:none!important;justify-content:flex-start!important;margin:14px 0!important;width:auto!important;font-size:11px!important;line-height:1.6}
+ .gallery-count-badge{margin:16px 0 10px!important;font-size:12px!important}
+ .dataset-mode-links{display:grid!important;grid-template-columns:1fr 1.25fr 1fr!important;gap:6px!important;width:100%!important;margin:12px 0 0!important;padding:5px!important;background:#f1f3f5;border-radius:14px}
+ .dataset-mode-links button{min-width:0!important;min-height:46px!important;padding:8px 4px!important;border:1px solid transparent!important;border-radius:10px!important;font-size:13px!important}
+ .camera-frame{aspect-ratio:4/3!important;max-height:none!important;border-radius:18px!important}.camera-wrap{gap:12px!important}
+ .camera-actions{display:flex!important;flex-wrap:wrap;gap:8px!important}.camera-actions>.button{flex:1;min-height:52px!important;font-size:14px!important;padding:0 12px!important}
+ .mobile-upload .button{min-height:52px!important;border-color:#dce0e5!important;color:#252d37!important;border-radius:12px!important}
+ .results{padding:0!important}.results-heading{gap:12px!important;margin-bottom:20px!important}.results-heading h1{font-size:30px!important}
+ .result-poster{border-radius:18px!important}.poster-photos figure{min-width:0}.poster-photos figcaption{overflow-wrap:anywhere}
+ .user-face-analysis{padding:16px;border-radius:16px}.user-face-analysis header{align-items:flex-start;gap:10px}.user-face-analysis h2{font-size:17px;line-height:1.4}.face-points-toggle{font-size:12px;padding:8px 12px}
+ .share-actions{display:grid!important;grid-template-columns:1fr 1fr!important}.share-actions .button{padding:8px!important;font-size:14px!important;min-width:0}
+ .reset-button{width:100%!important;margin-top:12px!important;min-height:50px!important;box-shadow:none!important}
+ .app-shell .button:focus-visible,.face-points-toggle:focus-visible,.dataset-mode-links button:focus-visible{outline:3px solid #238879;outline-offset:3px}
+ .loading-overlay{position:fixed!important;inset:0!important;z-index:100!important;border-radius:0!important;padding:22px!important;overflow:auto}
+}

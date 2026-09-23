@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
+<title>프레임 관리 · LOOKALIKE LAB</title>
+<link rel="stylesheet" href="/social-pages.css?v=1"><link rel="stylesheet" href="/site-nav.css?v=2"><link rel="stylesheet" href="/festival-cards.css?v=3"><link rel="stylesheet" href="/card-frames.css?v=4"><link rel="stylesheet" href="/frame-studio.css?v=1"><script defer src="/site-nav.js?v=2"></script>
+</head>
+<body class="frame-studio-page">
+<header class="site-header"><a class="site-brand" href="/">LOOKALIKE <span>LAB</span></a></header>
+<main class="page-shell frame-editor-page">
+<header class="studio-heading"><div><a class="studio-back" href="/admin">← 관리자 메뉴</a><h1>프레임 관리</h1><p>배경과 결과 정보를 조합해 나만의 카드를 만드세요.</p></div></header>
+<p id="frameStatus" class="frame-status" role="status">관리자 권한 확인 중…</p>
+<div id="frameWorkspace" hidden>
+<section class="studio-library" aria-label="프레임 목록"><div class="frame-toolbar"><button type="button" id="newFrame">+ 새 프레임</button><button type="button" id="reloadFrames">목록 새로고침</button></div><div id="frameList" class="frame-list" aria-label="저장된 프레임"></div></section>
+<form id="frameForm">
+<div class="frame-editor-layout">
+<div class="frame-stage-wrap">
+<div class="studio-preview-header"><strong>미리보기</strong><span>1440 × 1700px</span></div>
+<div class="studio-canvas"><div class="frame-preview" id="framePreview" aria-label="프레임 배치 미리보기"><div id="frameArt"></div></div></div>
+<div class="studio-preview-footer"><span>용지 72 × 85mm</span><span>편집 테두리는 저장되지 않아요</span></div>
+<p class="frame-help">영역을 선택해 드래그하거나 위치 값을 조정하세요.<br>선택한 영역은 방향키로도 이동할 수 있어요.</p>
+</div>
+<div class="frame-editor-controls">
+<section class="studio-section">
+<label>프레임 이름<input id="frameName" maxlength="60" required placeholder="예: 페스티벌 블랙"></label>
+<label class="studio-upload">배경 이미지<input id="frameFile" type="file" accept="image/png,image/jpeg,image/webp"><small class="frame-help">PNG · JPG · WebP, 최대 8MB · 권장 1440 × 1700px<br>글씨 없는 배경을 올려주세요.</small></label>
+<div class="frame-fields"><label>배경 맞춤<select id="frameFit"><option value="contain">전체 보이기 (비율 유지)</option><option value="cover">꽉 채우기 (일부 잘림)</option></select></label><label>남는 공간 색<input id="frameBackground" type="color" value="#ffffff"></label></div>
+</section>
+<section class="studio-section">
+<h2>문구 스타일</h2>
+<div class="studio-choices copy-style-choices" aria-label="문구 스타일">
+<button type="button" data-copy-mode="question" aria-pressed="false"><strong>혹시 ○○(이)세요?</strong><small>이름에 맞춰 자동 생성</small></button>
+<button type="button" data-copy-mode="hey" aria-pressed="false"><strong>야, ○○.</strong><small>짧고 유쾌한 한마디</small></button>
+<button type="button" data-copy-mode="custom" aria-pressed="true"><strong>자유 문구</strong><small>사용자가 직접 입력</small></button>
+</div>
+<label id="sampleCopyField">미리보기 문구<input id="sampleCopy" maxlength="42" value="문구를 입력해보세요"></label>
+<p id="copyStyleHelp" class="frame-help">자유 문구는 결과 화면에서 사용자가 입력한 글로 바뀝니다.</p>
+</section>
+<section class="studio-section">
+<h2>인물 템플릿</h2>
+<div class="studio-choices person-style-choices" aria-label="인물 템플릿">
+<button type="button" data-person-variant="horizontal" aria-pressed="true"><span class="template-diagram diagram-horizontal" aria-hidden="true"><span class="diagram-face"></span><span class="diagram-lines"></span></span><strong>가로형</strong><small>사진 옆 이름</small></button>
+<button type="button" data-person-variant="vertical" aria-pressed="false"><span class="template-diagram diagram-vertical" aria-hidden="true"><span class="diagram-face"></span><span class="diagram-lines"></span></span><strong>세로형</strong><small>사진 아래 이름</small></button>
+<button type="button" data-person-variant="photo" aria-pressed="false"><span class="template-diagram diagram-photo" aria-hidden="true"><span class="diagram-face"></span><span class="diagram-lines"></span></span><strong>포토형</strong><small>증명사진 스타일</small></button>
+<button type="button" data-person-variant="text" aria-pressed="false"><span class="template-diagram diagram-text" aria-hidden="true"><span>이름<br><small>직업</small></span></span><strong>텍스트형</strong><small>사진 없이 깔끔하게</small></button>
+</div>
+<p class="frame-help">템플릿을 고르면 영역 크기도 맞춰집니다. 위치와 크기는 아래에서 다시 조정할 수 있어요.</p>
+</section>
+<section class="studio-section">
+<h2>위치 · 스타일 조정</h2>
+<div class="frame-tabs" aria-label="배치할 정보"><button type="button" data-block="score" aria-pressed="true">싱크로율 · 분석 결과</button><button type="button" data-block="brand" aria-pressed="false">브랜드 문구</button><button type="button" data-block="copy" aria-pressed="false">문구</button><button type="button" data-block="person" aria-pressed="false">사진 · 이름 · 직업</button></div>
+<label id="brandTextField" hidden>브랜드 문구 내용<input id="brandText" maxlength="40" value="LOOKALIKE LAB" placeholder="예: LOOKALIKE LAB · 배재대 축제"><small class="frame-help">비워두면 LOOKALIKE LAB으로 표시됩니다.</small></label>
+<div class="frame-fields studio-geometry">
+<label>왼쪽 X<input id="blockX" type="number" min="0" max="680" step="1"></label><label>위쪽 Y<input id="blockY" type="number" min="0" max="820" step="1"></label>
+<label>영역 너비<input id="blockW" type="number" min="40" max="720" step="1"></label><label>영역 높이<input id="blockH" type="number" min="30" max="850" step="1"></label>
+<label>글자 크기<input id="blockSize" type="number" min="12" max="160" step="1"></label><label>글자 색<input id="blockColor" type="color"></label>
+<label>정렬<select id="blockAlign"><option value="left">왼쪽</option><option value="center">가운데</option><option value="right">오른쪽</option></select></label><label class="frame-check"><input id="blockVisible" type="checkbox" checked>정보 표시</label>
+</div>
+<p class="frame-help">이름·직업·점수는 예시이며 실제 결과로 교체됩니다. 긴 글은 영역에 맞춰 작아집니다.</p>
+</section>
+<footer class="studio-save-section">
+<label class="frame-check"><input id="framePublished" type="checkbox">일반 사용자에게 공개</label><p class="frame-help">저장 후 적용됩니다. 비공개 프레임은 관리자만 사용해요.</p>
+<div class="frame-toolbar"><button type="button" id="frameExport">미리보기 PNG</button><button type="submit" class="frame-save">프레임 저장</button></div>
+</footer>
+</div>
+</div>
+</form>
+</div>
+</main>
+<script src="/assets/supabase-2.57.4.min.js"></script><script src="/auth-widget.js?v=6"></script><script src="/admin-access.js?v=2"></script><script src="/card-frames.js?v=4"></script><script src="/festival-cards.js?v=6"></script><script src="/frame-editor.js?v=5"></script>
+</body></html>

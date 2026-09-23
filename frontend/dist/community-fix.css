@@ -1,0 +1,5 @@
+.composer .login-button {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}

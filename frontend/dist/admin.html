@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>관리 · LOOKALIKE LAB</title>
+<link rel="stylesheet" href="/admin.css?v=1"><link rel="stylesheet" href="/admin-live.css?v=1"><link rel="stylesheet" href="/admin-media.css?v=1"><link rel="stylesheet" href="/user-manager.css?v=1"><link rel="stylesheet" href="/auth-widget.css?v=1"><link rel="stylesheet" href="/admin-console.css?v=1"><link rel="stylesheet" href="/photo-viewer.css?v=1"><link rel="stylesheet" href="/mobile-ui.css?v=1"><link rel="stylesheet" href="/admin-mobile.css?v=1"><link rel="stylesheet" href="/site-nav.css?v=2"><script defer src="/site-nav.js?v=2"></script></head>
+<body class="admin-page">
+<header class="topbar"><a class="brand" href="/">LOOKALIKE <span>LAB</span></a><span class="page-name">관리 공간</span><div class="admin-id">권한 확인 중</div><a href="/account" class="account-link">내 계정</a></header>
+<div class="shell" hidden>
+<aside class="sidebar" aria-label="관리 메뉴"><p class="nav-caption">WORKSPACE</p><nav class="admin-menu">
+<a href="#posts" data-section="posts" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H5v16h14V4h-3M8 3h8v4H8zM8 12h8M8 16h5"/></svg><span>게시물 검토</span></a>
+<a href="#dataset" data-section="dataset"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>데이터셋</span></a>
+<a href="#users" id="userManageButton" data-section="users" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 5"/></svg><span>사용자 권한</span></a>
+<a href="/logs" id="auditLogsLink" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/></svg><span>작업 로그</span></a>
+<a href="/frames"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 16l6-6 5 5 3-3 4 4"/></svg><span>프레임 관리</span></a>
+</nav><div class="sidebar-foot"><a href="/gallery">공개 데이터셋 ↗</a><a href="/feed">결과 피드 ↗</a><p>관리자 변경 사항은<br>실제 서비스에 반영됩니다.</p></div></aside>
+<main class="console-main">
+<section data-admin-panel="posts">
+<header class="section-heading"><div><p class="eyebrow">COMMUNITY</p><h1>게시물 검토</h1><p>공유된 결과를 확인하고 피드에 게시하세요.</p></div><div class="overview"><span>게시됨 <b id="todayApproved">0</b></span><span>반려 <b id="todayRejected">0</b></span><span>수정 요청 <b id="todayChanges">0</b></span></div></header>
+<nav id="statusNav" class="status-tabs" aria-label="게시물 상태"></nav>
+<section class="toolbar" aria-label="게시물 검색"><label class="search"><span>검색</span><input id="searchInput" type="search" placeholder="닉네임, 결과 이름, 이야기"></label><label><span>카테고리</span><select id="categoryFilter"><option value="all">전체</option><option value="인물">인물</option><option value="애니 캐릭터">애니 캐릭터</option><option value="동물">동물</option></select></label><button class="reset" id="resetFilters" type="button">초기화</button></section>
+<section class="workspace"><div class="queue-panel"><header><div><h2 id="queueTitle">검토 대기</h2><p id="queueCount"></p></div><select id="sortSelect" aria-label="제출물 정렬"><option value="oldest">오래된 순</option><option value="newest">최신 순</option></select></header><div class="queue-list" id="queueList"></div><div class="empty" id="emptyState" hidden><b>아직 제출물이 없어요</b><span>새 결과가 공유되면 이곳에서 검토할 수 있습니다.</span></div></div><article class="review-panel" id="reviewPanel" aria-live="polite"></article></section>
+</section>
+<section data-admin-panel="dataset" id="datasetManager" hidden>
+<header class="section-heading"><div><p class="eyebrow">REFERENCE LIBRARY</p><h1>데이터셋</h1><p>비교 기준을 추가하고, 공개되는 대상을 관리하세요.</p></div><a class="quiet-link" href="/gallery">공개 목록 보기 ↗</a></header>
+<details class="import-card" open><summary><span>이미지 링크로 추가</span><small>분석부터 등록까지 자동으로</small></summary>
+<form id="datasetImportForm"><div class="import-fields">
+<label>카테고리<select name="category"><option value="human">인물</option><option value="character">애니 캐릭터</option><option value="animal">동물</option></select></label>
+<label>등록 방식<select name="existing_id"><option value="">새 대상 추가</option></select></label>
+<label>이름<input name="name" required maxlength="80" placeholder="예: 카리나"></label>
+<label>분류 · 작품 · 품종 (선택)<input name="group" maxlength="80" placeholder="예: 가수 · aespa"></label>
+<label class="wide-field">이미지 URL<input name="image_url" type="url" required maxlength="3000" placeholder="https://…/photo.jpg" inputmode="url" autocomplete="off"><small>공개 HTTPS 이미지 주소 · JPG, PNG, WebP · 최대 8MB</small></label>
+<label class="wide-field">소개 (선택)<textarea name="description" maxlength="500" rows="2" placeholder="간단한 소개. 비워두면 분석 방식 안내가 들어갑니다."></textarea></label></div>
+<div class="import-footer"><p>사람은 한 명의 얼굴이 선명한 사진을, 애니·동물은 얼굴이 크게 나온 사진을 넣어 주세요. 공개 사용 권한이 있는 사진만 등록하세요.</p><button class="primary-button" type="submit">분석하고 등록</button></div>
+<div id="importProgress" class="import-progress" role="status" aria-live="polite" hidden></div></form></details>
+<section class="dataset-library"><div class="library-toolbar"><label>이름 검색<input id="datasetSearch" type="search" placeholder="대상 이름 검색"></label><label>종류<select id="datasetType"><option value="all">모든 카테고리</option><option value="human">인물</option><option value="character">애니 캐릭터</option><option value="animal">동물</option></select></label><label>상태<select id="datasetVisibility"><option value="active">공개 중</option><option value="removed">삭제됨</option><option value="all">전체</option></select></label><label>정렬<select id="datasetSort"><option value="name">이름순</option><option value="newest">최신순</option></select></label><button id="datasetReload" class="reset" type="button">새로고침</button></div><p id="datasetStatus" role="status"></p><div id="datasetList" class="dataset-list"></div><button id="datasetMore" class="reset load-more" type="button" hidden>더 보기</button></section>
+</section>
+<section class="user-manager" id="userManager" data-admin-panel="users" hidden><header class="section-heading"><div><p class="eyebrow">ACCESS CONTROL</p><h1>사용자 권한</h1><p>함께 운영할 관리자를 지정하세요.</p></div></header><p class="user-manager-note">최고 관리자만 사용자 권한을 변경할 수 있습니다. 운영 관리자는 게시물과 데이터셋을 관리합니다.</p><div class="user-list" id="userList"></div></section>
+</main></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/assets/supabase-2.57.4.min.js"></script><script src="/auth-widget.js?v=6"></script><script src="/admin-access.js?v=2"></script><script src="/dataset-state.js?v=3"></script><script type="module" src="/admin-live.js?v=6"></script><script defer src="/admin-dataset.js?v=3"></script>
+</body></html>

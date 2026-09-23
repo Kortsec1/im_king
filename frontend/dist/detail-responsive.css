@@ -1,0 +1,27 @@
+.portrait-stage {
+  display: block;
+}
+
+.portrait-stage > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  min-width: 0;
+  margin: 0;
+  object-fit: initial;
+}
+
+.portrait-stage > .face-map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  grid-area: 1 / 1;
+  align-self: stretch;
+  justify-self: stretch;
+  width: 100%;
+  height: 100%;
+}
+.face-map .landmark.pink{fill:#ff5c8a}.face-map .landmark.amber{fill:#ffb84d}.face-map .landmark.mint{fill:#61d9c2}.face-map .landmark.blue{fill:#66a8ff}.face-map .landmark.violet{fill:#b58cff}.face-map .landmark.orange{fill:#ff7a59}.face-map .key{fill:#fff;stroke:#af3440;stroke-width:1.4}.face-map line{stroke:#af3440;stroke-width:1.5}.face-map rect{fill:none;stroke:#f0a12b;stroke-width:2;stroke-dasharray:8 6}
+/* Photo-specific, admin-reviewed visible attributes. */
+.photo-attribute-editor{margin:20px 0;padding:18px;border:1px solid #dfe2e6;border-radius:12px;background:#fafbf8}.photo-attribute-editor>summary{font-size:17px;font-weight:750;cursor:pointer;min-height:30px}.photo-attribute-editor p{font-size:13px;color:#626772;line-height:1.6}.photo-attribute-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.photo-attribute-editor label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:650}.photo-attribute-editor select,.photo-attribute-editor textarea{min-height:46px;width:100%;padding:10px 12px;background:white;border:1px solid #cbd0d5;border-radius:8px;font-family:inherit;font-size:16px;color:#191b21}.photo-attribute-editor button{margin-top:16px;min-height:46px;padding:10px 18px;background:#af3440;color:white;border:0;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer}.photo-attribute-editor :focus-visible{outline:3px solid #af3440;outline-offset:2px}.photo-attribute-editor :disabled{opacity:.55;cursor:wait}.photo-attribute-summary{font-size:13px;line-height:1.7;background:#f3f5f1;padding:12px;border-radius:8px}.photo-attribute-editor .attribute-message{color:#9c2836;min-height:20px}@media(max-width:400px){.photo-attribute-grid{grid-template-columns:1fr}}

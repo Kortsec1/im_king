@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f6f8" />
+    <meta name="description" content="닮은꼴 비교에 사용하는 인물, 애니 캐릭터, 동물 이미지 데이터셋입니다." />
+    <link rel="preconnect" href="https://thumb.wikimedia.org" crossorigin />
+    <link rel="preconnect" href="https://static.wikia.nocookie.net" crossorigin />
+    <link rel="stylesheet" href="/gallery.css?v=3" />
+    <link rel="stylesheet" href="/auth-widget.css?v=1" />
+    <link rel="stylesheet" href="/product-ui.css?v=1" />
+    <title>비교 데이터셋 · 닮은꼴 찾기</title>
+  <link rel="stylesheet" href="/mobile-ui.css?v=1"><link rel="stylesheet" href="/site-nav.css?v=2"><script defer src="/site-nav.js?v=2"></script></head>
+  <body>
+    <a class="skip-link" href="#galleryGrid">데이터 목록으로 바로가기</a>
+    <header class="site-header"><a class="brand" href="/" aria-label="닮은꼴 찾기 홈">LOOKALIKE <span>LAB</span></a><nav aria-label="주요 메뉴"><a href="/">닮은꼴 찾기</a><a href="/gallery" aria-current="page">데이터셋</a></nav></header>
+    <main>
+      <section class="dataset-head" aria-labelledby="pageTitle">
+        <div><p class="breadcrumb">LOOKALIKE LAB / DATASET</p><h1 id="pageTitle">비교 데이터셋</h1><p>현재 비교 후보로 등록된 사람, 애니 캐릭터, 실사 동물 이미지입니다.</p></div>
+        <dl class="summary" aria-label="데이터셋 구성"><div><dt>전체</dt><dd id="totalCount">—</dd></div><div><dt>사람</dt><dd id="humanCount">—</dd></div><div><dt>캐릭터</dt><dd id="characterCount">—</dd></div><div><dt>동물</dt><dd id="animalCount">—</dd></div></dl>
+      </section>
+      <section class="catalog" aria-labelledby="catalogTitle">
+        <div class="toolbar"><div><h2 id="catalogTitle">항목</h2><div id="filters" class="filters" aria-label="데이터 유형 필터"></div></div><label class="search"><span>데이터셋 검색</span><input id="searchInput" type="search" placeholder="이름, 작품, 직업으로 검색" autocomplete="off" /></label></div>
+        <div class="status-row"><p id="resultStatus" role="status" aria-live="polite"></p><span>항목을 누르면 얼굴 분석 상세 페이지가 열립니다.</span></div>
+        <div id="galleryGrid" class="gallery-grid" aria-busy="true"></div>
+        <button id="loadMore" class="load-more" type="button" hidden>더 보기</button>
+        <div id="emptyState" class="empty-state" hidden><strong>일치하는 항목이 없습니다.</strong><p>검색어를 줄이거나 다른 유형을 선택해 보세요.</p></div>
+      </section>
+    </main>
+    <footer><span>LOOKALIKE LAB</span><p>사람·캐릭터·동물은 모두 동일한 비교 데이터셋 항목으로 관리됩니다.</p></footer>
+    <script src="/assets/supabase-2.57.4.min.js"></script><script src="/auth-widget.js?v=6"></script><script type="module" src="/gallery.js?v=19"></script>
+  <script src="/admin-access.js?v=2"></script><script src="/dataset-state.js?v=2"></script></body>
+</html>
