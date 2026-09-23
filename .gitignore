@@ -35,6 +35,8 @@ frontend/dist/.vercel/
 !scripts/
 scripts/*
 !scripts/dev_gateway.py
+!scripts/test-frontend-static.cjs
+!scripts/test-landing-browser.mjs
 !scripts/queue_worker.py
 !scripts/start_backend.ps1
 !scripts/start_queue_worker.ps1
