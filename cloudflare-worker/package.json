@@ -1,0 +1,6 @@
+{
+  "name": "im-king-analysis-queue",
+  "private": true,
+  "scripts": {"deploy": "wrangler deploy", "dev": "wrangler dev", "types": "wrangler types"},
+  "devDependencies": {"@cloudflare/workers-types": "latest", "wrangler": "4.127.1"}
+}

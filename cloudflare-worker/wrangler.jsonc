@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "im-king-analysis-queue",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "logs": { "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.01 }
+  },
+  "triggers": { "crons": ["*/5 * * * *"] },
+  "d1_databases": [{"binding": "DB", "database_name": "im-king-analysis-jobs", "database_id": "ab18a9f5-49a1-4840-82df-e3d91c147b42"}]
+}
