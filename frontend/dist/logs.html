@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>작업 로그 · LOOKALIKE LAB</title>
+<link rel="stylesheet" href="/admin.css?v=1"><link rel="stylesheet" href="/auth-widget.css?v=1"><link rel="stylesheet" href="/admin-console.css?v=1"><link rel="stylesheet" href="/mobile-ui.css?v=1"><link rel="stylesheet" href="/admin-mobile.css?v=1"><link rel="stylesheet" href="/logs.css?v=1"><link rel="stylesheet" href="/site-nav.css?v=2"><script defer src="/site-nav.js?v=2"></script></head>
+<body class="admin-page"><header class="topbar"><a class="brand" href="/">LOOKALIKE <span>LAB</span></a><span class="page-name">작업 로그</span><div class="admin-id">최고 관리자 전용</div></header>
+<main class="logs-main"><a class="logs-back" href="/admin">← 관리자 페이지</a><header class="section-heading"><div><p class="eyebrow">ACTIVITY HISTORY</p><h1>작업 로그</h1><p>운영 변경과 분석 처리 이력을 확인하세요.</p></div></header>
+<p id="logAccess" role="status">접근 권한을 확인하고 있습니다.</p>
+<section id="logConsole" hidden><form id="logFilters" class="log-filters"><label>기록 구분<select id="logSource"><option value="service">게시물·계정·공개 설정</option><option value="analysis">분석·사진·데이터셋 정보</option></select></label><label>작업 종류<select id="logAction"><option value="">전체 작업</option></select></label><label class="log-search">작업자 또는 대상 ID<input id="logQuery" type="search" maxlength="100" placeholder="닉네임 또는 ID 검색"></label><button type="submit">조회</button><button id="logRefresh" type="button">새로고침</button></form>
+<p class="log-help">시각은 한국 시간입니다. 기능 적용 이후 실제로 처리된 작업을 기록합니다. 사진 원본, 얼굴 분석값, 게시글 본문, 비밀번호와 인증 토큰은 기록하지 않습니다. 일반 페이지 방문·버튼 클릭은 수집하지 않습니다.</p>
+<p id="logStatus" role="status" aria-live="polite"></p><div id="logList" class="log-list"></div><button id="logMore" class="log-more" type="button" hidden>이전 기록 더 보기</button></section></main>
+<script src="/assets/supabase-2.57.4.min.js"></script><script src="/auth-widget.js?v=6"></script><script type="module" src="/logs.js?v=1"></script></body></html>
